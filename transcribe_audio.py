@@ -2,7 +2,7 @@
 Program Name: transcribe_audio.py
 Author: DarkRook Cyber, LLC
 Description: 
-    This Python script needs alotta help to run on a Mac, and will only take a .wav file as input. But fear not see steps below
+    - Note: This Python script will need alotta help to run on a Mac, and will only take a .wav file as input. Will run fine on a Linux machine. But fear not see steps below to get this script to run on MacOs!
     - make sure you have python3 on your Mac, open a Terminal window
     - Install Homebrew: 
          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
