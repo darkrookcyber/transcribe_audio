@@ -16,7 +16,9 @@ Description:
          pip3 install pydub
     - clean up the input .wav file to work with Google's API (Google's API is picky and wants the PCM 16-bit audio codec which is "pcm_s16le" and 16,000Hz): 
          ffmpeg -i path/to/your/input_audio_file.wav -acodec pcm_s16le -ar 16000 path/to/your/output_audio_file.wav
-    -  Note: This script will create temporary audio files, to break up the original audio file into chunks for analysis via Google's API. Google's free version only analyzes for about 30-60 seconds of audio before timing out. Have tried other methods of chunking within the script, but the most reliable way was to use PyDub to create new audio files and use those as the chunks. If you can find a better way to do this with free Google'ness to do the speech to text transcription, please let me know!  
+    - Run the script (assuming local path to script and inout audio file):
+         python3 transcribe_audio.py output.wav script.txt
+    -  Note: This script will generate little 30 second temporary audio files, to break up the original audio file into chunks for analysis via Google's API. Google's free version only analyzes for about 30-60 seconds of audio before timing out. Have tried other methods of chunking within the script, but the most reliable way was to use PyDub to create new audio files and use those as the chunks. If you can find a better way to do this with free Google'ness to do the speech to text transcription, please let me know!  
 License:
     This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
@@ -35,7 +37,7 @@ from pydub.silence import detect_nonsilent
 def transcribe_audio(audio_file_path, output_file_name):
     recognizer = sr.Recognizer()
     chunk_length = 30 * 1000  # Duration of each chunk in milliseconds for pydub
-    overlap = 5 * 1000  # Overlap duration in milliseconds for pydub
+    overlap = 2 * 1000  # Overlap duration in milliseconds for pydub
 
     with sr.AudioFile(audio_file_path) as source:
         audio = recognizer.record(source)  # Record the entire file
